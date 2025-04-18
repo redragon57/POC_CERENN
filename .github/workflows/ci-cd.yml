@@ -65,7 +65,7 @@ jobs:
     name: SonarQube Analysis
     needs: build-and-test
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    if: always()  # Toujours exécuter ce job
 
     steps:
     - name: Checkout code
@@ -98,10 +98,12 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
+        echo "Début de l'analyse SonarQube..."
         mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
           -Dsonar.projectKey=redragon57_POC_CERENN \
           -Dsonar.organization=redragon57 \
           -Dsonar.host.url=https://sonarcloud.io
+        echo "Analyse SonarQube terminée"
 
   deploy:
     name: Deploy
