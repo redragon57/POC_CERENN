@@ -80,6 +80,13 @@ jobs:
         distribution: 'zulu'
         cache: maven
 
+    - name: Cache SonarQube packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.sonar/cache
+        key: ${{ runner.os }}-sonar
+        restore-keys: ${{ runner.os }}-sonar
+
     - name: Cache Maven packages
       uses: actions/cache@v4
       with:
@@ -87,22 +94,10 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
 
-    - name: SonarQube Scan
-      uses: SonarSource/sonarqube-scan-action@master
+    - name: Build and analyze
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: https://sonarcloud.io
-      with:
-        args: >
-          -Dsonar.organization=redragon57
-          -Dsonar.projectKey=redragon57_POC_CERENN
-          -Dsonar.projectName=POC_CERENN
-          -Dsonar.java.binaries=target/classes
-          -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
-          -Dsonar.sources=src/main/java
-          -Dsonar.tests=src/test/java
-          -Dsonar.java.source=17
-          -Dsonar.java.target=17
+      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=redragon57_POC_CERENN
 
   deploy:
     name: Deploy
