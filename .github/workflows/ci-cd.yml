@@ -137,11 +137,18 @@ jobs:
         mvn -B clean package
         echo "Compilation terminée"
 
+    - name: Get GitHub App Token
+      id: get_github_app_token
+      uses: tibdex/github-app-token@v1
+      with:
+        app_id: ${{ secrets.APP_ID }}
+        private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ steps.get_github_app_token.outputs.token }}
       with:
         tag_name: v${{ github.run_number }}
         release_name: Release v${{ github.run_number }}
@@ -156,7 +163,7 @@ jobs:
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ steps.get_github_app_token.outputs.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: target/panneau-mvc-1.0-SNAPSHOT.jar
