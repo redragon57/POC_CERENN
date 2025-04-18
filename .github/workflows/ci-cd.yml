@@ -110,6 +110,8 @@ jobs:
     needs: [build-and-test, sonar-analysis]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
 
     steps:
     - name: Checkout code
@@ -137,12 +139,12 @@ jobs:
 
     - name: Create Release
       id: create_release
-      uses: softprops/action-gh-release@v1
+      uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: v${{ github.run_number }}
-        name: Release v${{ github.run_number }}
+        release_name: Release v${{ github.run_number }}
         body: |
           Release créée automatiquement par le workflow CI/CD
           - Build: ${{ github.run_number }}
@@ -150,10 +152,9 @@ jobs:
           - Date: ${{ github.event.head_commit.timestamp }}
         draft: false
         prerelease: false
-        generate_release_notes: true
 
     - name: Upload Release Asset
-      uses: actions/upload-release-asset@v2
+      uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
