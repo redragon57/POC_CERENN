@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Panneau.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">panneau-mvc</a> &gt; <a href="index.source.html" class="el_package">fr.cerenn.model</a> &gt; <span class="el_source">Panneau.java</span></div><h1>Panneau.java</h1><pre class="source lang-java linenums">package fr.cerenn.model;
+
+public class Panneau {
+    private static final double CONTRAINTE_MIN = 320;
+    private static final double CONTRAINTE_MAX = 3200;
+    private static final double CONTRAINTE_HAUTEUR_MAX = 3150;
+    private static final double CONTRAINTE_HAUTEUR_FINI_MAX = 3100;
+
+    private double hauteurPlié;
+    private double largeurPlié;
+    private double diagonalePlié;
+    private double hauteurDéplié;
+    private double largeurDéplié;
+    private double diagonaleDéplié;
+
+<span class="fc" id="L16">    public Panneau(double hauteurPlié, double largeurPlié, double diagonalePlié,</span>
+                  double hauteurDéplié, double largeurDéplié, double diagonaleDéplié) {
+<span class="fc" id="L18">        this.hauteurPlié = hauteurPlié;</span>
+<span class="fc" id="L19">        this.largeurPlié = largeurPlié;</span>
+<span class="fc" id="L20">        this.diagonalePlié = diagonalePlié;</span>
+<span class="fc" id="L21">        this.hauteurDéplié = hauteurDéplié;</span>
+<span class="fc" id="L22">        this.largeurDéplié = largeurDéplié;</span>
+<span class="fc" id="L23">        this.diagonaleDéplié = diagonaleDéplié;</span>
+<span class="fc" id="L24">    }</span>
+
+    public boolean verifierDimensions() {
+        // Vérification des dimensions pliées
+<span class="fc" id="L28">        boolean dimensionsPliéesValides = verifierDimensionsPliées();</span>
+        
+        // Vérification des dimensions dépliées
+<span class="fc" id="L31">        boolean dimensionsDépliéesValides = verifierDimensionsDépliées();</span>
+        
+        // Vérification des contraintes spécifiques
+<span class="fc" id="L34">        boolean contraintesValides = verifierContraintes();</span>
+        
+<span class="pc bpc" id="L36" title="1 of 6 branches missed.">        return dimensionsPliéesValides &amp;&amp; dimensionsDépliéesValides &amp;&amp; contraintesValides;</span>
+    }
+
+    private boolean verifierDimensionsPliées() {
+<span class="fc" id="L40">        double diagonaleCalculée = Math.sqrt(Math.pow(hauteurPlié, 2) + Math.pow(largeurPlié, 2));</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        return Math.abs(diagonaleCalculée - diagonalePlié) &lt; 0.001;</span>
+    }
+
+    private boolean verifierDimensionsDépliées() {
+<span class="fc" id="L45">        double diagonaleCalculée = Math.sqrt(Math.pow(hauteurDéplié, 2) + Math.pow(largeurDéplié, 2));</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        return Math.abs(diagonaleCalculée - diagonaleDéplié) &lt; 0.001;</span>
+    }
+
+    private boolean verifierContraintes() {
+        // lb &gt; 320 et hb &gt; 320
+<span class="fc bfc" id="L51" title="All 4 branches covered.">        boolean dimensionsMinValides = largeurDéplié &gt; CONTRAINTE_MIN &amp;&amp; hauteurDéplié &gt; CONTRAINTE_MIN;</span>
+        
+        // sqrt(hf^2+lb^2) &lt; 3200
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        boolean diagonale1Valide = Math.sqrt(Math.pow(hauteurPlié, 2) + Math.pow(largeurDéplié, 2)) &lt; CONTRAINTE_MAX;</span>
+        
+        // sqrt(hb^2+lf^2) &lt; 3200
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        boolean diagonale2Valide = Math.sqrt(Math.pow(hauteurDéplié, 2) + Math.pow(largeurPlié, 2)) &lt; CONTRAINTE_MAX;</span>
+        
+        // hb &lt; 3150 et lb &lt; 3150
+<span class="pc bpc" id="L60" title="1 of 4 branches missed.">        boolean dimensionsMaxValides = hauteurDéplié &lt; CONTRAINTE_HAUTEUR_MAX &amp;&amp; largeurDéplié &lt; CONTRAINTE_HAUTEUR_MAX;</span>
+        
+        // hf &lt; 3100
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        boolean hauteurFiniValide = hauteurPlié &lt; CONTRAINTE_HAUTEUR_FINI_MAX;</span>
+
+<span class="pc bpc" id="L65" title="1 of 6 branches missed.">        return dimensionsMinValides &amp;&amp; diagonale1Valide &amp;&amp; diagonale2Valide &amp;&amp; </span>
+<span class="pc bpc" id="L66" title="2 of 4 branches missed.">               dimensionsMaxValides &amp;&amp; hauteurFiniValide;</span>
+    }
+
+    // Getters et Setters
+    public double getHauteurPlié() {
+<span class="fc" id="L71">        return hauteurPlié;</span>
+    }
+
+    public void setHauteurPlié(double hauteurPlié) {
+<span class="nc" id="L75">        this.hauteurPlié = hauteurPlié;</span>
+<span class="nc" id="L76">    }</span>
+
+    public double getLargeurPlié() {
+<span class="nc" id="L79">        return largeurPlié;</span>
+    }
+
+    public void setLargeurPlié(double largeurPlié) {
+<span class="nc" id="L83">        this.largeurPlié = largeurPlié;</span>
+<span class="nc" id="L84">    }</span>
+
+    public double getDiagonalePlié() {
+<span class="nc" id="L87">        return diagonalePlié;</span>
+    }
+
+    public void setDiagonalePlié(double diagonalePlié) {
+<span class="nc" id="L91">        this.diagonalePlié = diagonalePlié;</span>
+<span class="nc" id="L92">    }</span>
+
+    public double getHauteurDéplié() {
+<span class="fc" id="L95">        return hauteurDéplié;</span>
+    }
+
+    public void setHauteurDéplié(double hauteurDéplié) {
+<span class="nc" id="L99">        this.hauteurDéplié = hauteurDéplié;</span>
+<span class="nc" id="L100">    }</span>
+
+    public double getLargeurDéplié() {
+<span class="nc" id="L103">        return largeurDéplié;</span>
+    }
+
+    public void setLargeurDéplié(double largeurDéplié) {
+<span class="nc" id="L107">        this.largeurDéplié = largeurDéplié;</span>
+<span class="nc" id="L108">    }</span>
+
+    public double getDiagonaleDéplié() {
+<span class="nc" id="L111">        return diagonaleDéplié;</span>
+    }
+
+    public void setDiagonaleDéplié(double diagonaleDéplié) {
+<span class="nc" id="L115">        this.diagonaleDéplié = diagonaleDéplié;</span>
+<span class="nc" id="L116">    }</span>
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PanneauView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">panneau-mvc</a> &gt; <a href="index.source.html" class="el_package">fr.cerenn.view</a> &gt; <span class="el_source">PanneauView.java</span></div><h1>PanneauView.java</h1><pre class="source lang-java linenums">package fr.cerenn.view;
+
+import fr.cerenn.controller.PanneauController;
+import java.util.Scanner;
+
+public class PanneauView {
+    private PanneauController controller;
+    private Scanner scanner;
+
+<span class="nc" id="L10">    public PanneauView() {</span>
+<span class="nc" id="L11">        this.controller = new PanneauController();</span>
+<span class="nc" id="L12">        this.scanner = new Scanner(System.in);</span>
+<span class="nc" id="L13">    }</span>
+
+    public void afficherMenu() {
+<span class="nc" id="L16">        System.out.println(&quot;\n=== Gestion des dimensions de panneau ===&quot;);</span>
+<span class="nc" id="L17">        System.out.println(&quot;1. Créer un nouveau panneau&quot;);</span>
+<span class="nc" id="L18">        System.out.println(&quot;2. Vérifier les dimensions&quot;);</span>
+<span class="nc" id="L19">        System.out.println(&quot;3. Afficher les contraintes&quot;);</span>
+<span class="nc" id="L20">        System.out.println(&quot;4. Quitter&quot;);</span>
+<span class="nc" id="L21">        System.out.print(&quot;Choix : &quot;);</span>
+<span class="nc" id="L22">    }</span>
+
+    public void afficherContraintes() {
+<span class="nc" id="L25">        System.out.println(&quot;\n=== Contraintes de dimensions ===&quot;);</span>
+<span class="nc" id="L26">        System.out.println(&quot;1. Largeur déplié (lb) &gt; 320 mm&quot;);</span>
+<span class="nc" id="L27">        System.out.println(&quot;2. Hauteur déplié (hb) &gt; 320 mm&quot;);</span>
+<span class="nc" id="L28">        System.out.println(&quot;3. √(hf² + lb²) &lt; 3200 mm&quot;);</span>
+<span class="nc" id="L29">        System.out.println(&quot;4. √(hb² + lf²) &lt; 3200 mm&quot;);</span>
+<span class="nc" id="L30">        System.out.println(&quot;5. Hauteur déplié (hb) &lt; 3150 mm&quot;);</span>
+<span class="nc" id="L31">        System.out.println(&quot;6. Largeur déplié (lb) &lt; 3150 mm&quot;);</span>
+<span class="nc" id="L32">        System.out.println(&quot;7. Hauteur plié (hf) &lt; 3100 mm&quot;);</span>
+<span class="nc" id="L33">    }</span>
+
+    public void saisirDimensions() {
+<span class="nc" id="L36">        System.out.println(&quot;\nSaisie des dimensions du panneau (en mm) :&quot;);</span>
+        
+<span class="nc" id="L38">        System.out.print(&quot;Hauteur plié (hf) : &quot;);</span>
+<span class="nc" id="L39">        double hauteurPlié = scanner.nextDouble();</span>
+        
+<span class="nc" id="L41">        System.out.print(&quot;Largeur plié (lf) : &quot;);</span>
+<span class="nc" id="L42">        double largeurPlié = scanner.nextDouble();</span>
+        
+<span class="nc" id="L44">        System.out.print(&quot;Diagonale plié : &quot;);</span>
+<span class="nc" id="L45">        double diagonalePlié = scanner.nextDouble();</span>
+        
+<span class="nc" id="L47">        System.out.print(&quot;Hauteur déplié (hb) : &quot;);</span>
+<span class="nc" id="L48">        double hauteurDéplié = scanner.nextDouble();</span>
+        
+<span class="nc" id="L50">        System.out.print(&quot;Largeur déplié (lb) : &quot;);</span>
+<span class="nc" id="L51">        double largeurDéplié = scanner.nextDouble();</span>
+        
+<span class="nc" id="L53">        System.out.print(&quot;Diagonale déplié : &quot;);</span>
+<span class="nc" id="L54">        double diagonaleDéplié = scanner.nextDouble();</span>
+
+<span class="nc" id="L56">        controller.creerPanneau(hauteurPlié, largeurPlié, diagonalePlié,</span>
+<span class="nc" id="L57">                              hauteurDéplié, largeurDéplié, diagonaleDéplié);</span>
+<span class="nc" id="L58">    }</span>
+
+    public void verifierDimensions() {
+        try {
+<span class="nc" id="L62">            boolean valide = controller.verifierDimensionsPanneau();</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">            if (valide) {</span>
+<span class="nc" id="L64">                System.out.println(&quot;\n✅ Toutes les dimensions sont valides !&quot;);</span>
+<span class="nc" id="L65">            } else {</span>
+<span class="nc" id="L66">                System.out.println(&quot;\n❌ Certaines dimensions ne sont pas valides !&quot;);</span>
+<span class="nc" id="L67">                System.out.println(&quot;Veuillez vérifier les contraintes suivantes :&quot;);</span>
+<span class="nc" id="L68">                afficherContraintes();</span>
+            }
+<span class="nc" id="L70">        } catch (IllegalStateException e) {</span>
+<span class="nc" id="L71">            System.out.println(&quot;Erreur : &quot; + e.getMessage());</span>
+        }
+<span class="nc" id="L73">    }</span>
+
+    public void executer() {
+<span class="nc" id="L76">        boolean continuer = true;</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        while (continuer) {</span>
+<span class="nc" id="L78">            afficherMenu();</span>
+<span class="nc" id="L79">            int choix = scanner.nextInt();</span>
+            
+<span class="nc bnc" id="L81" title="All 5 branches missed.">            switch (choix) {</span>
+                case 1:
+<span class="nc" id="L83">                    saisirDimensions();</span>
+<span class="nc" id="L84">                    break;</span>
+                case 2:
+<span class="nc" id="L86">                    verifierDimensions();</span>
+<span class="nc" id="L87">                    break;</span>
+                case 3:
+<span class="nc" id="L89">                    afficherContraintes();</span>
+<span class="nc" id="L90">                    break;</span>
+                case 4:
+<span class="nc" id="L92">                    continuer = false;</span>
+<span class="nc" id="L93">                    break;</span>
+                default:
+<span class="nc" id="L95">                    System.out.println(&quot;Choix invalide !&quot;);</span>
+            }
+        }
+<span class="nc" id="L98">        scanner.close();</span>
+<span class="nc" id="L99">    }</span>
+
+    public static void main(String[] args) {
+<span class="nc" id="L102">        PanneauView view = new PanneauView();</span>
+<span class="nc" id="L103">        view.executer();</span>
+<span class="nc" id="L104">    }</span>
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

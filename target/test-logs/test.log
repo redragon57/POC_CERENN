@@ -1,0 +1,39 @@
+2025-04-18 15:39:07.305 [main] INFO  f.c.controller.PanneauControllerTest - Initialisation des tests PanneauController
+2025-04-18 15:39:07.307 [main] INFO  f.c.controller.PanneauControllerTest - Test vérification dimensions panneau valide
+2025-04-18 15:39:07.308 [main] DEBUG f.c.controller.PanneauControllerTest - Résultat vérification : true
+2025-04-18 15:39:07.310 [main] INFO  f.c.controller.PanneauControllerTest - Initialisation des tests PanneauController
+2025-04-18 15:39:07.310 [main] INFO  f.c.controller.PanneauControllerTest - Test création panneau
+2025-04-18 15:39:07.311 [main] DEBUG f.c.controller.PanneauControllerTest - Panneau créé : hf=1000, lf=1000, hb=2000, lb=2000
+2025-04-18 15:39:07.311 [main] INFO  f.c.controller.PanneauControllerTest - Initialisation des tests PanneauController
+2025-04-18 15:39:07.311 [main] INFO  f.c.controller.PanneauControllerTest - Test vérification dimensions sans panneau
+2025-04-18 15:39:07.311 [main] INFO  f.c.controller.PanneauControllerTest - Initialisation des tests PanneauController
+2025-04-18 15:39:07.312 [main] INFO  f.c.controller.PanneauControllerTest - Test vérification dimensions panneau invalide
+2025-04-18 15:39:07.312 [main] DEBUG f.c.controller.PanneauControllerTest - Résultat vérification : false
+2025-04-18 15:39:07.315 [main] INFO  fr.cerenn.model.PanneauTest - Initialisation des tests Panneau
+2025-04-18 15:39:07.315 [main] DEBUG fr.cerenn.model.PanneauTest - Panneau valide créé : hf=1000, lf=1000, hb=2000, lb=2000
+2025-04-18 15:39:07.316 [main] DEBUG fr.cerenn.model.PanneauTest - Panneau invalide créé : hf=1000, lf=1000, hb=300, lb=2000
+2025-04-18 15:39:07.316 [main] INFO  fr.cerenn.model.PanneauTest - Test vérification diagonales
+2025-04-18 15:39:07.316 [main] DEBUG fr.cerenn.model.PanneauTest - Panneau test diagonales créé : hf=1000, lf=1000, hb=2000, lb=2000
+2025-04-18 15:39:07.316 [main] DEBUG fr.cerenn.model.PanneauTest - Résultat vérification : false
+2025-04-18 15:39:07.316 [main] INFO  fr.cerenn.model.PanneauTest - Initialisation des tests Panneau
+2025-04-18 15:39:07.316 [main] DEBUG fr.cerenn.model.PanneauTest - Panneau valide créé : hf=1000, lf=1000, hb=2000, lb=2000
+2025-04-18 15:39:07.316 [main] DEBUG fr.cerenn.model.PanneauTest - Panneau invalide créé : hf=1000, lf=1000, hb=300, lb=2000
+2025-04-18 15:39:07.316 [main] INFO  fr.cerenn.model.PanneauTest - Test vérification dimensions panneau invalide
+2025-04-18 15:39:07.316 [main] DEBUG fr.cerenn.model.PanneauTest - Résultat vérification : false
+2025-04-18 15:39:07.317 [main] INFO  fr.cerenn.model.PanneauTest - Initialisation des tests Panneau
+2025-04-18 15:39:07.317 [main] DEBUG fr.cerenn.model.PanneauTest - Panneau valide créé : hf=1000, lf=1000, hb=2000, lb=2000
+2025-04-18 15:39:07.317 [main] DEBUG fr.cerenn.model.PanneauTest - Panneau invalide créé : hf=1000, lf=1000, hb=300, lb=2000
+2025-04-18 15:39:07.317 [main] INFO  fr.cerenn.model.PanneauTest - Test vérification contraintes maximales
+2025-04-18 15:39:07.317 [main] DEBUG fr.cerenn.model.PanneauTest - Panneau test contraintes max créé : hf=3200, lf=1000, hb=3200, lb=3200
+2025-04-18 15:39:07.317 [main] DEBUG fr.cerenn.model.PanneauTest - Résultat vérification : false
+2025-04-18 15:39:07.318 [main] INFO  fr.cerenn.model.PanneauTest - Initialisation des tests Panneau
+2025-04-18 15:39:07.318 [main] DEBUG fr.cerenn.model.PanneauTest - Panneau valide créé : hf=1000, lf=1000, hb=2000, lb=2000
+2025-04-18 15:39:07.318 [main] DEBUG fr.cerenn.model.PanneauTest - Panneau invalide créé : hf=1000, lf=1000, hb=300, lb=2000
+2025-04-18 15:39:07.318 [main] INFO  fr.cerenn.model.PanneauTest - Test vérification contraintes minimales
+2025-04-18 15:39:07.318 [main] DEBUG fr.cerenn.model.PanneauTest - Panneau test contraintes min créé : hf=1000, lf=1000, hb=300, lb=300
+2025-04-18 15:39:07.319 [main] DEBUG fr.cerenn.model.PanneauTest - Résultat vérification : false
+2025-04-18 15:39:07.319 [main] INFO  fr.cerenn.model.PanneauTest - Initialisation des tests Panneau
+2025-04-18 15:39:07.319 [main] DEBUG fr.cerenn.model.PanneauTest - Panneau valide créé : hf=1000, lf=1000, hb=2000, lb=2000
+2025-04-18 15:39:07.319 [main] DEBUG fr.cerenn.model.PanneauTest - Panneau invalide créé : hf=1000, lf=1000, hb=300, lb=2000
+2025-04-18 15:39:07.319 [main] INFO  fr.cerenn.model.PanneauTest - Test vérification dimensions panneau valide
+2025-04-18 15:39:07.319 [main] DEBUG fr.cerenn.model.PanneauTest - Résultat vérification : true
