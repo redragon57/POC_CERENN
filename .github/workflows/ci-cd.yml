@@ -110,8 +110,6 @@ jobs:
     needs: [build-and-test, sonar-analysis]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    permissions:
-      contents: write
 
     steps:
     - name: Checkout code
@@ -137,35 +135,28 @@ jobs:
         mvn -B clean package
         echo "Compilation terminée"
 
-    - name: Get GitHub App Token
-      id: get_github_app_token
-      uses: tibdex/github-app-token@v1
+    - name: Copy JAR via SSH
+      uses: appleboy/scp-action@master
       with:
-        app_id: ${{ secrets.APP_ID }}
-        private_key: ${{ secrets.APP_PRIVATE_KEY }}
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        source: "target/*.jar"
+        target: "/home/deploy"
+        strip_components: 0
 
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ steps.get_github_app_token.outputs.token }}
+    - name: Restart Service
+      uses: appleboy/ssh-action@master
       with:
-        tag_name: v${{ github.run_number }}
-        release_name: Release v${{ github.run_number }}
-        body: |
-          Release créée automatiquement par le workflow CI/CD
-          - Build: ${{ github.run_number }}
-          - Commit: ${{ github.sha }}
-          - Date: ${{ github.event.head_commit.timestamp }}
-        draft: false
-        prerelease: false
-
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ steps.get_github_app_token.outputs.token }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: target/panneau-mvc-1.0-SNAPSHOT.jar
-        asset_name: panneau-mvc-v${{ github.run_number }}.jar
-        asset_content_type: application/java-archive 
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          echo "Arrêt du service..."
+          sudo systemctl stop panneau-mvc || true
+          echo "Copie du nouveau JAR..."
+          sudo cp /home/deploy/panneau-mvc-1.0-SNAPSHOT.jar /opt/panneau-mvc/
+          echo "Démarrage du service..."
+          sudo systemctl start panneau-mvc
+          echo "Vérification du statut..."
+          sudo systemctl status panneau-mvc 
