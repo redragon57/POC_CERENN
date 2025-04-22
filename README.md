@@ -1,4 +1,4 @@
-# Panneau MVC
+# Panneau CERENN
 
 [![CI/CD Pipeline](https://github.com/[VOTRE_USERNAME]/panneau-mvc/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/[VOTRE_USERNAME]/panneau-mvc/actions/workflows/ci-cd.yml)
 [![SonarQube](https://sonarcloud.io/api/project_badges/measure?project=panneau-mvc&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=panneau-mvc)
