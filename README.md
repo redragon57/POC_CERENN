@@ -1,8 +1,6 @@
 # Panneau CERENN
 
-[![CI/CD Pipeline](https://github.com/[VOTRE_USERNAME]/panneau-mvc/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/[VOTRE_USERNAME]/panneau-mvc/actions/workflows/ci-cd.yml)
-[![SonarQube](https://sonarcloud.io/api/project_badges/measure?project=panneau-mvc&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=panneau-mvc)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=panneau-mvc&metric=coverage)](https://sonarcloud.io/summary/new_code?id=panneau-mvc)
+![CI/CD Pipeline](https://github.com/redragon57/POC_CERENN/actions/runs/14547447387)
 
 Application Java pour la gestion des dimensions de panneaux avec vérification des contraintes.
 
